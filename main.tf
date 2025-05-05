@@ -22,8 +22,9 @@ resource "vercel_project" "with_git" {
   name = "cs486-final-src-backend"
   git_repository = {
     type = "github"
-    repo = "edwardshturman/hono-on-vercel"
+    repo = "edwardshturman/cs486-final-src"
   }
+  root_directory = "backend"
 
   serverless_function_region                        = "sfo1"
   automatically_expose_system_environment_variables = true
