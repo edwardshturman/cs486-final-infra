@@ -14,6 +14,10 @@ resource "supabase_project" "cs486-final-db" {
   region            = "us-west-1"
 }
 
+data "supabase_pooler" "production" {
+  project_ref = supabase_project.cs486-final-db.id
+}
+
 resource "vercel_project" "with_git" {
   name = "cs486-final-src-backend"
   git_repository = {
@@ -24,8 +28,12 @@ resource "vercel_project" "with_git" {
   serverless_function_region                        = "sfo1"
   automatically_expose_system_environment_variables = true
   environment = [{
-    key    = "DB_ID"
-    value  = supabase_project.cs486-final-db.id
+    key = "DATABASE_URL"
+    value = replace(
+      data.supabase_pooler.production.url.transaction,
+      "[YOUR-PASSWORD]",
+      var.supabase_db_password
+    )
     target = ["production"]
   }]
 }
