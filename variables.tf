@@ -1,3 +1,15 @@
+variable "prefix" {
+  description = "Project prefix"
+  type        = string
+  default     = "cs486-final"
+}
+
+variable "vercel_team" {
+  description = "Vercel team slug or ID for projects and deployments"
+  type        = string
+  default     = "compsigh"
+}
+
 variable "vercel_api_token" {
   description = "Vercel API token"
   type        = string
