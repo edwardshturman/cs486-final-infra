@@ -19,7 +19,8 @@ data "supabase_pooler" "production" {
 }
 
 resource "vercel_project" "with_git" {
-  name = "cs486-final-src-backend"
+  name      = "cs486-final-src-backend"
+  framework = "nextjs"
   git_repository = {
     type = "github"
     repo = "edwardshturman/cs486-final-src"
@@ -30,11 +31,11 @@ resource "vercel_project" "with_git" {
   automatically_expose_system_environment_variables = true
   environment = [{
     key = "DATABASE_URL"
-    value = replace(
+    value = "${replace(
       data.supabase_pooler.production.url.transaction,
       "[YOUR-PASSWORD]",
       var.supabase_db_password
-    )
+    )}?pgbouncer=true"
     target = ["production"]
   }]
 }
