@@ -1,5 +1,5 @@
 resource "vercel_project" "frontend" {
-  name      = "${var.prefix}-src-frontend"
+  name      = "${var.prefix}-frontend"
   framework = "nextjs"
   git_repository = {
     type = "github"
@@ -18,6 +18,11 @@ resource "vercel_project" "frontend" {
     )}?pgbouncer=true"
     target = ["production"]
   }]
+}
+
+resource "vercel_custom_environment" "frontend_qa" {
+  project_id = vercel_project.frontend.id
+  name       = "qa"
 }
 
 resource "vercel_deployment" "frontend" {

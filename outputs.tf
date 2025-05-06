@@ -8,7 +8,17 @@ output "supabase_db_url" {
   value       = data.supabase_pooler.production.url.transaction
 }
 
-output "backend_vercel_deployment_url" {
-  description = "The Preview Deployment URL of cs486-final-src-backend"
-  value       = vercel_deployment.backend.url
+output "backend_student_vercel_deployment_url" {
+  description = "The Preview Deployment URL of cs486-final-backend-student"
+  value       = vercel_deployment.backend_student.url
+}
+
+output "backend_catalog_vercel_deployment_url" {
+  description = "The Preview Deployment URL of cs486-final-backend-catalog"
+  value       = vercel_deployment.backend_catalog.url
+}
+
+output "backend_registration_vercel_deployment_url" {
+  description = "The Preview Deployment URL of cs486-final-backend-registration"
+  value       = vercel_deployment.backend_registration.url
 }
